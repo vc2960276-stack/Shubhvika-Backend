@@ -12,7 +12,7 @@ app.use(cors());
 
 // Database Connection With MongoDB
 mongoose.connect(
-  "mongodb+srv://vc2960276_db_user:Ccfbz4lfe3R9qHPD@cluster0.ng9wd2l.mongodb.net/?appName=Cluster0"
+  "mongodb+srv://vc2960276_db_user:VS4ohu2sZNRpsV3W@cluster0.ng9wd2l.mongodb.net/"
 );
 
 // API Creation
