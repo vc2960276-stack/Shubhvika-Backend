@@ -10,7 +10,6 @@ try {
 
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
@@ -1747,7 +1746,7 @@ function serializeOrder(order) {
 }
 
 // ---------------------------------------------------------------------------
-// App
+// App Setup
 // ---------------------------------------------------------------------------
 
 const app = express();
@@ -1760,20 +1759,48 @@ app.use(
 
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-    methods: [
-      "GET",
-      "POST",
-      "PUT",
-      "PATCH",
-      "DELETE",
-      "OPTIONS",
-    ],
-  })
-);
+// ---------------------------------------------------------------------------
+// Safe, Robust, and Credentials-Aware CORS Middleware
+// ---------------------------------------------------------------------------
+const ALLOWED_ORIGINS = new Set([
+  "https://www.shubhvika.in",
+  "https://shubhvika-frontend.vercel.app",
+  "http://localhost:3000",
+  "http://localhost:5173",
+]);
+
+if (FRONTEND_URL) {
+  ALLOWED_ORIGINS.add(FRONTEND_URL);
+}
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+
+  // Set explicit, non-wildcard origin matching request source
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  } else {
+    // Satisfy credentials requirement when origin is absent/untracked
+    res.setHeader("Access-Control-Allow-Origin", "https://www.shubhvika.in");
+  }
+
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie"
+  );
+
+  // Immediately respond to OPTIONS preflight requests
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  next();
+});
 
 // ---------------------------------------------------------------------------
 // Health check
@@ -2015,12 +2042,10 @@ api.get("/products", async (req, res) => {
         category = "kids";
       }
 
-      // Use your existing formatter
+      // Use existing formatter
       const formatted = formatShopifyProduct(product);
 
-      // IMPORTANT:
-      // Override formatter category with the category
-      // calculated directly above.
+      // Override formatter category with the calculated category
       formatted.category = category;
 
       return formatted;
@@ -2124,6 +2149,7 @@ api.get("/products", async (req, res) => {
     });
   }
 });
+
 // ---------------------------------------------------------------------------
 // Get single product
 // ---------------------------------------------------------------------------
