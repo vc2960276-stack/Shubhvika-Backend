@@ -1784,7 +1784,7 @@ app.get(
   (_req, res) => {
     res.json({
       service:
-        "HIMAANIX API",
+        "SHUBHKIKA API",
       status: "ok",
       runtime: "node",
     });
@@ -1867,7 +1867,7 @@ api.get(
   (_req, res) => {
     res.json({
       service:
-        "HIMAANIX API",
+        "SHUBHKIKA API",
       status: "ok",
       runtime: "node",
     });
