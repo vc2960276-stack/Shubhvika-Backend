@@ -2902,7 +2902,7 @@ if (
     "0.0.0.0",
     () => {
       console.log(
-        `[himaanix] API running on http://localhost:${PORT}`
+        `[shubhvika] API running on http://localhost:${PORT}`
       );
     }
   );
