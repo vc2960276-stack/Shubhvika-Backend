@@ -21,7 +21,7 @@ const { MongoClient } = require("mongodb");
 // ---------------------------------------------------------------------------
 
 const MONGO_URL = process.env.MONGO_URL;
-const DB_NAME = process.env.DB_NAME || "test_database";
+const DB_NAME = process.env.DB_NAME || "Shubhvika";
 const JWT_SECRET = process.env.JWT_SECRET;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@shubhvika.com";
 const ADMIN_PASSWORD =
