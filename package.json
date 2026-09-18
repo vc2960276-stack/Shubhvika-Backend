@@ -1,7 +1,7 @@
 {
-  "name": "himaanix-backend",
+  "name": "shubhvika-backend",
   "version": "1.0.0",
-  "description": "HIMAANIX e-commerce backend (Node.js + Express + MongoDB)",
+  "description": "Shubhvika e-commerce backend (Node.js + Express + MongoDB)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
