@@ -23,11 +23,11 @@ const { MongoClient } = require("mongodb");
 const MONGO_URL = process.env.MONGO_URL;
 const DB_NAME = process.env.DB_NAME || "test_database";
 const JWT_SECRET = process.env.JWT_SECRET;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@himaanix.com";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@shubhvika.com";
 const ADMIN_PASSWORD =
   process.env.ADMIN_PASSWORD || "change-this-admin-password";
 const FRONTEND_URL =
-  process.env.FRONTEND_URL || "https://himaanix-frontend.vercel.app";
+  process.env.FRONTEND_URL || "https://shubhvika-frontend.vercel.app";
 const PORT = process.env.PORT || 8001;
 
 if (!MONGO_URL) {
